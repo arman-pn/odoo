@@ -5,33 +5,34 @@
         <field name="name">mygame.game.list</field>
         <field name="model">mygame.game</field>
         <field name="arch" type="xml">
-            <list decoration-success="is_today"
-                decoration-warning="is_recent"
-                decoration-danger="is_old">
+            <list decoration-success="not is_sold"
+                  decoration-danger="is_sold">
                 <field name="name" />
                 <field name="highest_offer" />
                 <field name="release_date" />
                 <field name="is_paid" />
+                <field name="is_sold" />
                 <field name="price" />
                 <field name="discount_percent" />
                 <field name="final_price" />
             </list>
         </field>
     </record>
-
-    <record id="action_discounted_games" model="ir.actions.act_window">
-        <field name="name">Discounted Games</field>
-        <field name="res_model">mygame.game</field>
-        <field name="view_mode">list,form</field>
-        <field name="domain">[('discount_percent','>',0)]</field>
+    <record id="view_offer_list" model="ir.ui.view">
+        <field name="name">mygame.offer.list</field>
+        <field name="model">mygame.offer</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="partner_id"/>
+                <field name="offered_price"/>
+                <field name="game_id"/>
+            </list>
+        </field>
     </record>
+    
+    
 
-    <record id="action_sold_games" model="ir.actions.act_window">
-        <field name="name">Sold Games</field>
-        <field name="res_model">mygame.game</field>
-        <field name="view_mode">list,form</field>
-        <field name="domain">[('is_sold','=',True)]</field>
-    </record>
+   
 
 
     <!-- search View -->
@@ -73,6 +74,7 @@
                         <field name="description" />
                         <field name="gender" />
                         <field name="release_date" />
+                        <field name="is_sold" />
                         <field name="is_paid" />
                     </group>
 
@@ -87,6 +89,24 @@
             </form>
         </field>
     </record>
+
+    <record id="view_offer_form" model="ir.ui.view">
+        <field name="name">mygame.offer.form</field>
+        <field name="model">mygame.offer</field>
+        <field name="arch" type="xml">
+            <form string="Game Offer">
+                <sheet>
+                    <group>
+                        <field name="partner_id"/>
+                        <field name="game_id"/>
+                        <field name="offered_price"/>
+                        <field name="create_date" readonly="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    
 
 
     <!-- Action -->
@@ -110,5 +130,46 @@
         <field name="name">Game Offers</field>
         <field name="res_model">mygame.offer</field>
         <field name="view_mode">kanban,list,form</field>
+        <field name="view_id" ref="view_offer_kanban"/>
+        <!-- <field name="view_id" ref="view_offer_list"/> -->
+        <field name="search_view_id" eval="False"/>
     </record>
+
+
+    <record id="action_discounted_games" model="ir.actions.act_window">
+        <field name="name">Discounted Games</field>
+        <field name="res_model">mygame.game</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('discount_percent','>',0)]</field>
+    </record>
+
+    <record id="action_sold_games" model="ir.actions.act_window">
+        <field name="name">Sold Games</field>
+        <field name="res_model">mygame.game</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('is_sold','=',True)]</field>
+    </record>
+
+
+
+   <!-- kanban view -->
+    <record id="view_offer_kanban" model="ir.ui.view">
+        <field name="name">mygame.offer.kanban</field>
+        <field name="model">mygame.offer</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="partner_id"/>
+                <field name="offered_price"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                            <strong><field name="partner_id"/></strong><br/>
+                            <span>Offer: <field name="offered_price"/>$</span>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+    
 </odoo>
