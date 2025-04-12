@@ -1,0 +1,76 @@
+<odoo>
+    <!-- لیست پیشنهادها -->
+    <record id="view_offer_list" model="ir.ui.view">
+        <field name="name">mygame.offer.list</field>
+        <field name="model">mygame.offer</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="game_id"/>
+                <field name="partner_id"/>
+                <field name="offered_price"/>
+                <field name="offer_date"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- فرم پیشنهاد -->
+    <record id="view_offer_form" model="ir.ui.view">
+        <field name="name">mygame.offer.form</field>
+        <field name="model">mygame.offer</field>
+        <field name="arch" type="xml">
+            <form string="Game Offer">
+                <sheet>
+                    <group>
+                        <field name="game_id"/>
+                        <field name="partner_id"/>
+                        <field name="offered_price"/>
+                        <field name="offer_date"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- نمای Kanban -->
+    <record id="view_offer_kanban" model="ir.ui.view">
+        <field name="name">mygame.offer.kanban</field>
+        <field name="model">mygame.offer</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_small_column">
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click o_kanban_card">
+                            <div class="o_kanban_details">
+                                <strong>
+                                    <field name="game_id"/>
+                                </strong>
+                                <div>
+                                    <span>💰 </span>
+                                    <field name="offered_price"/>
+                                    <span> USD</span>
+                                </div>
+                                <div>
+                                    <span>👤 </span>
+                                    <field name="partner_id"/>
+                                </div>
+                                <div>
+                                    <span>📅 </span>
+                                    <field name="offer_date"/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- اکشن برای پیشنهادها -->
+    <record id="action_offer_window" model="ir.actions.act_window">
+        <field name="name">Game Offers</field>
+        <field name="res_model">mygame.offer</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="view_id" ref="view_offer_kanban"/>
+    </record>
+
+</odoo>

@@ -1,0 +1,1 @@
+python odoo-bin -d mydb -r arman -w arman -u my_game_module

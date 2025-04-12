@@ -1,0 +1,18 @@
+{
+    'name': 'My Game Module',
+    'version': '1.0',
+    'summary': 'A module for managing games.',
+    'description': 'This module allows you to manage games and their details.',
+    'author': 'arman',
+    'sequence': 10,
+    'category': 'Entertainment',
+    'depends': ['base', 'mail'],
+    'data': ['security/ir.model.access.csv',
+             'data/email_template.xml',
+             'views/game.xml',
+             'views/menu.xml', 
+             ],
+    'installable': True,
+    'application': True,
+    'auto_install': False,
+}

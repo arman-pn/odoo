@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Menu -->
+    <menuitem
+        id="menu_game_root"
+        name="Games"
+        sequence="1"
+    />
+    <menuitem id="menu_all_games" name="All Games"
+        parent="menu_game_root"
+        action="action_game_window"
+        sequence="10" />
+
+    <menuitem id="menu_discounted_games" name="Discounted Games"
+        parent="menu_game_root"
+        action="action_discounted_games"
+        sequence="20" />
+
+    <menuitem id="menu_sold_games" name="Sold Games"
+        parent="menu_game_root"
+        action="action_sold_games"
+        sequence="30" />
+
+    <menuitem
+        id="menu_offer_list"
+        name="Offers"
+        parent="menu_game_root"
+        action="action_offer_window"
+        sequence="1"
+    />
+</odoo>

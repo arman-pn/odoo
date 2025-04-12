@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_mygame,access_mygame.game,model_mygame_game,base.group_user,1,1,1,1
+access_offer_user,access_mygame.offer,model_mygame_offer,base.group_user,1,1,1,1
