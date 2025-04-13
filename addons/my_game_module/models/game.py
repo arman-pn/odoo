@@ -15,7 +15,7 @@ from datetime import datetime, timedelta
 class MyGame(models.Model):
     _name = 'mygame.game'
     _description = 'My Game Model'
-    # _inherit = 'base.entity'
+    _inherit = ['mail.thread', 'mail.activity.mixin']
 
     # --- Fields ---
     genderlist = [("male", "Male"), ("female", "Female"),("both","Both")]

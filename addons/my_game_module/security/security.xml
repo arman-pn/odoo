@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <data noupdate="0">
+
+    <!-- 🎮 GAME RULES -->
+
+    <!-- فقط سازنده بازی بتونه بازی خودش رو ویرایش کنه -->
+    <record id="rule_game_owner" model="ir.rule">
+      <field name="name">Game Owner can manage their own games</field>
+      <field name="model_id" ref="my_game_module.model_mygame_game"/>
+      <field name="domain_force">[('create_uid', '=', user.id)]</field>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_write" eval="1"/>
+      <field name="perm_create" eval="1"/>
+      <field name="perm_unlink" eval="1"/>
+      <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <!-- سوپر یوزر همه بازی‌ها رو مدیریت کنه -->
+    <record id="rule_game_superuser" model="ir.rule">
+      <field name="name">Superuser full access to all games</field>
+      <field name="model_id" ref="my_game_module.model_mygame_game"/>
+      <field name="domain_force">[(1, '=', 1)]</field>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_write" eval="1"/>
+      <field name="perm_create" eval="1"/>
+      <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <!-- همه کاربران بتونن بازی‌ها رو فقط ببینن -->
+    <record id="rule_game_read_all" model="ir.rule">
+      <field name="name">All users can read all games</field>
+      <field name="model_id" ref="my_game_module.model_mygame_game"/>
+      <field name="domain_force">[(1, '=', 1)]</field>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_write" eval="0"/>
+      <field name="perm_create" eval="0"/>
+      <field name="perm_unlink" eval="0"/>
+      <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <!-- 💸 OFFER RULES -->
+
+    <!-- فقط سازنده آفر بتونه آفر خودش رو مدیریت کنه -->
+    <record id="rule_offer_owner" model="ir.rule">
+      <field name="name">Offer Owner can manage their own offers</field>
+      <field name="model_id" ref="my_game_module.model_mygame_offer"/>
+      <field name="domain_force">[('create_uid', '=', user.id)]</field>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_write" eval="1"/>
+      <field name="perm_create" eval="1"/>
+      <field name="perm_unlink" eval="1"/>
+      <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <!-- سوپر یوزر بتونه همه آفرها رو مدیریت کنه -->
+    <record id="rule_offer_superuser" model="ir.rule">
+      <field name="name">Superuser full access to all offers</field>
+      <field name="model_id" ref="my_game_module.model_mygame_offer"/>
+      <field name="domain_force">[(1, '=', 1)]</field>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_write" eval="1"/>
+      <field name="perm_create" eval="1"/>
+      <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <!-- سایر کاربران فقط بتونن آفرها رو ببینن -->
+    <record id="rule_offer_read_all" model="ir.rule">
+      <field name="name">All users can read all offers</field>
+      <field name="model_id" ref="my_game_module.model_mygame_offer"/>
+      <field name="domain_force">[(1, '=', 1)]</field>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_write" eval="0"/>
+      <field name="perm_create" eval="0"/>
+      <field name="perm_unlink" eval="0"/>
+      <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+  </data>
+</odoo>

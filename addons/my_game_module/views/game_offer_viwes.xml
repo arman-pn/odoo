@@ -22,7 +22,7 @@
                 <sheet>
                     <group>
                         <field name="game_id"/>
-                        <field name="partner_id"/>
+                        <field name="partner_id" readonly="1"/>
                         <field name="offered_price"/>
                         <field name="offer_date"/>
                     </group>
